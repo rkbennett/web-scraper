@@ -18,7 +18,7 @@ scrape({
     // In this example, you can clone the Our Code World website
     //urls: ['https://www.apple.com/'],
     urls: [process.env.PROTO + '://' + process.env.URL + '/'],
-    urlFilter: (url) => !(endsWithAny(['.mp4', '.mp3', '.mpeg', '.js'], url)),
+    urlFilter: (url) => !(endsWithAny(['.mp4', '.mp3', '.mpeg'], url)),
     // Specify the path where the content should be saved
     // In this case, in the current directory inside the ourcodeworld dir
     //directory: '/tmp/www.apple.com',
