@@ -92,6 +92,42 @@ class PuppeteerPlugin {
 			            };
 				};
 
+
+				await page.$$eval('link[rel="preload"]', (links) => {
+                                  links.forEach((link) => {
+                                    const href = link.getAttribute('href');
+                                    const imagesrcset = link.getAttribute('imagesrcset');
+                                    if ((href && !(href.startsWith('/css') || href.startsWith('/fonts') || href.startsWith('/images') || href.startsWith('/js'))) || imagesrcset && !(imagesrcset.startsWith('/css') || imagesrcset.startsWith('/fonts') || imagesrcset.startsWith('/images') || imagesrcset.startsWith('/js'))) {
+                                      link.remove()
+                                    }
+                                  });
+                                });
+
+
+                                await page.$$eval('link[rel="prefetch"]', (links) => {
+                                  links.forEach((link) => {
+                                    const href = link.getAttribute('href');
+                                    const imagesrcset = link.getAttribute('imagesrcset');
+                                    if ((href && !(href.startsWith('/css') || href.startsWith('/fonts') || href.startsWith('/images') || href.startsWith('/js'))) || imagesrcset && !(imagesrcset.startsWith('/css') || imagesrcset.startsWith('/fonts') || imagesrcset.startsWith('/images') || imagesrcset.startsWith('/js'))) {
+                                      link.remove()
+                                    }
+                                  });
+                                });
+
+
+
+
+                                await page.$$eval('script:not([src])', (scripts) => {
+                                  scripts.forEach((script) => {
+                                    const code = script.innerHTML;
+                                    if (code && code.includes('https://')) {
+                                      script.remove();
+                                    }
+                                  });
+                                });
+
+
+				
 				const content = await page.content();
 				content.includes("src=\"getuid")
 				await page.close();
