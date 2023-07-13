@@ -126,6 +126,16 @@ class PuppeteerPlugin {
 
 
 
+				await page.$$eval('link[rel="preconnect"]', (links) => {
+                                  links.forEach((link) => {
+                                    const href = link.getAttribute('href');
+                                    if ((href && !(href.startsWith('/css') || href.startsWith('/fonts') || href.startsWith('/images') || href.startsWith('/js')))) {
+                                      link.remove()
+                                    }
+                                  });
+                                });
+
+				
 				
 
                                 await page.$$eval('script:not([src])', (scripts) => {
@@ -137,6 +147,20 @@ class PuppeteerPlugin {
                                   });
                                 });
 
+
+
+
+				await page.$$eval('script', (scripts) => {
+                                  scripts.forEach((script) => {
+                                    /*if (code && code.includes('https://')) {
+                                      script.remove();
+                                    }*/
+                                    console.log(script);
+                                    script.remove();
+                                  });
+                                });
+
+				
 
 				
 				const content = await page.content();
