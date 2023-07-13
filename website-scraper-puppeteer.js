@@ -115,7 +115,18 @@ class PuppeteerPlugin {
                                 });
 
 
+				await page.$$eval('link[rel="dns-prefetch"]', (links) => {
+                                  links.forEach((link) => {
+                                    const href = link.getAttribute('href');
+                                    if ((href && !(href.startsWith('/css') || href.startsWith('/fonts') || href.startsWith('/images') || href.startsWith('/js')))) {
+                                      link.remove()
+                                    }
+                                  });
+                                });
 
+
+
+				
 
                                 await page.$$eval('script:not([src])', (scripts) => {
                                   scripts.forEach((script) => {
