@@ -1,10 +1,8 @@
 FROM node:19-bullseye
 RUN mkdir /app
 WORKDIR /app
-COPY index.js /app/index.js
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
-COPY website-scraper-puppeteer.js /app/node_modules/website-scraper-puppeteer/lib/index.js
 ENV CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 ENV DEPTH=0
 #RUN npm install website-scraper website-scraper-puppeteer && \
@@ -17,6 +15,8 @@ RUN npm install && \
     chown root:root chrome_sandbox && \
     chmod 4755 chrome_sandbox && \
     cp -p chrome_sandbox /usr/local/sbin/chrome-devel-sandbox
+COPY index.js /app/index.js
+COPY website-scraper-puppeteer.js /app/node_modules/website-scraper-puppeteer/lib/index.js
 USER node
 WORKDIR /app
 ENTRYPOINT nodejs index.js
