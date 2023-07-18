@@ -58,6 +58,8 @@ class PuppeteerPlugin {
 				}
 
 				await page.evaluate(() => {
+				    const onetrust = Array.from(document.querySelectorAll('[id*="onetrust"]'));
+				    onetrust.forEach(element => element.remove());
 				    var cookieBtn = document.querySelector('#onetrust-accept-btn-handler');
 				    if(cookieBtn){
 					cookieBtn.click();
