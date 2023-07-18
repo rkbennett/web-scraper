@@ -37,6 +37,8 @@ class PuppeteerPlugin {
 				const url = response.url;
 				const page = await this.browser.newPage();
 
+				await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+
 				if (hasValues(this.headers)) {
 					logger.info('set headers to puppeteer page', this.headers);
 					await page.setExtraHTTPHeaders(this.headers);
