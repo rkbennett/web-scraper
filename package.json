@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "website-scraper-puppeteer": "github:website-scraper/website-scraper-puppeteer"
   }
