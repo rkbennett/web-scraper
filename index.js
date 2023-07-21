@@ -1,4 +1,3 @@
-// index.js
 //const scrape = import('website-scraper');
 //const PuppeteerPlugin = import('website-scraper-puppeteer');
 import scrape from 'website-scraper';
@@ -43,7 +42,7 @@ scrape({
                 timeout: 10000,
                 viewportN: 10
             }, /* optional */
-            blockNavigation: true,
+            blockNavigation: false,
             evaluatePage: async(page) => {
                 const iframes = await page.$$('iframe');
                 for (const iframe of iframes) {
